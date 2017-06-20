@@ -1,0 +1,282 @@
+
+Contra - RAM Map
+
+--------
+
+11: Temporary Storage for Player Index (0-1)
+12
+13
+14
+15
+16
+17: Bullet Counter per Shot
+18: Game Mode
+19: Routine Index for Ending
+1A: Permanent Frame Counter
+1B
+1C: Demo Mode (0 = Not in Demo Mode)
+1D
+1E
+1F
+20
+21: Index for PPU Tile Mapping
+22: Number of Players (0 = 1 Player)
+23
+24: 30-lives Code Switch (1 = Code Activated)
+25: Pause State (1 = Game Paused)
+26
+27: Level of Demo Mode
+28
+29
+2A: Various delays (low byte)
+2B: Various delays (high byte)
+2C: Routine Index for Main Game
+2D: Routine Index for Ending Scene
+2E
+2F: Current Weapon Strength Code (0-3)
+30: Current Level (0 = Level 1)
+31: Game Completion Count
+32: Player 1 Lives
+33: Player 2 Lives
+34: Randomizer
+35: Variable related to sprites (alternate randomizer?)
+36: Index for PPU Sprite Index
+37: Indoor Screen Cleared (0 = Not Cleared)
+38: Player 1 Game Over State (1 = Game Over)
+39: Player 2 Game Over State (1 = Game Over)
+3A: Continues Remaining
+3B
+3C: Player 1 Score for Extra Life - Low Byte
+3D: Player 1 Score for Extra Life - High Byte
+3E: Player 2 Score for Extra Life - Low Byte
+3F: Player 2 Score for Extra Life - High Byte
+
+40-5F: Level Header (20 bytes)
+
+42: Line Index (Ending Credits)
+
+60
+61
+62
+63
+64: Screen Number
+65: Scrolling Offset (outdoor) / Movement from room to room (0-3) (indoor)
+66
+67
+68: Level Scrolling Type (H/V) ?
+69: Sprite Data Offset (6xx)
+6A: HUD Display Switch
+6B
+
+6C
+6D
+
+6E
+6F
+
+70: Number of Tiles to Change for Boss Loading
+71
+72
+73
+74: Timer for Palette Change
+
+75
+76: Auto-Scroll Counter
+
+77
+78
+79: Running Man Generation Routine Index
+7A: Running Man Generation Coefficient (0 = No Generation)
+7B: Generated Man Initial X Position on Screen
+7C: Generated Man Initial Y Position on Screen
+7D: Eagle Weapon Flash Timer
+7F
+
+80
+81
+82: Offset for Enemy Data
+83: Temporary storage for X register (enemy index)
+84
+85: Number of Arms/Mortar Launchers Destroyed
+86: Remaining Cores/Bosses to Destroy
+87: Number of Boss Platings Destroyed
+88: Enemy Cycles Counter
+89
+8A
+8B
+8C
+8E: Enemy Attack Switch (1 = Enemies Attack)
+
+X as player 0 or 1
+
+90,X
+92,X
+94,X
+96,X
+98,X: Player X Velocity
+9A,X
+9C,X
+9E,X
+A0,X
+A2,X
+A4,X
+A6,X
+
+AA,X: Current Weapon Code
+AC,X
+AE,X: Timer for Invincibility (after dying)
+B0,X: Timer for B Weapon Effect (decreases every 8 frames)
+B2,X: Player Animation Frame in Water
+B4,X: Player Death Flag (and more ?)
+B6,X
+B8,X
+BA,X
+BC,X
+BE,X
+C0,X
+C2,X: Player Aim Code
+C4,X
+C6,X: Player Y Velocity
+C8,X: Timer for Electrocution
+CA,X
+CC,X
+CE,X
+D0,X
+D2,X
+D4,X: Player X Acceleration
+D6,X: Player Animation Frame (Sprite Code)
+D8,X
+DA,X
+
+DF
+
+E0: Sound Pointer - High Byte
+E1: Sound Pointer - Low Byte
+
+E4: Sound Pointer - High Byte
+E5: Sound Pointer - Low Byte
+
+E6
+E8: related to sound...
+E9
+EA
+EB
+
+EC: Sound Pointer - High Byte
+ED: Sound Pointer - Low Byte
+
+F1: Controller 1 Buttons Held
+F2: Controller 2 Buttons Held
+
+F3: Temporary storage for Accumulator
+
+F5: Controller 1 Buttons Pressed
+F6: Controller 1 Buttons Pressed
+
+F7: Temporary storage for Y register
+
+F9,X
+
+FC: Vertical Scroll Offset
+FD: Horizontal Scroll Offset
+FE
+FF
+
+----
+
+10A
+122: Sound/Music Index
+128
+12D
+12F
+
+194
+195
+196
+
+300
+301
+
+30A,X: Enemy Sprite Code
+
+31A,X: Player Y Position on Screen
+324,X: Enemy Y Position on Screen
+334,X: Player X Position on Screen
+33E,X: Enemy X Position on Screen
+
+358,X: Enemy Sprite Attributes
+
+x... ....	Vertical Flip
+.x.. ....	Horizontal Flip
+..x. ....	Sprite drawn behind background
+...x ....	?
+.... x...	Gun Recoil for Running/Rifle/Turret Man/Scuba Diver
+.... .x..	Sprite has specific palette code
+.... ..xx	Palette Code (if bit 2 is set)
+
+368,X: Player Bullet Tile Code
+378,X
+388,X
+398,X
+3A8,X
+3B8,X
+3C8,X
+3D8,X
+3E8,X
+3F8,X
+408,X
+418,X
+428,X
+438,X
+448,X: Bullet Owner ? (0 = Player 1 ; 1 = Player 2)
+458,X
+468,X
+478,X
+488,X
+498,X
+4A8,X: Bullet Index per Shot ?
+
+4B8,X: Enemy Routine Index (0 = Empty Enemy Slot)
+
+4C8,X: Enemy Y Acceleration
+4D8,X: Enemy X Acceleration
+4E8,X: Enemy Y Velocity (high byte)
+4F8,X: Enemy Y Velocity (low byte)
+508,X: Enemy X Velocity (high byte)
+518,X: Enemy X Velocity (low byte)
+
+528,X: Enemy Type
+538,X: Enemy Animation Frame Delay Counter
+548,X: Bullet Hit Sound Index (0-3)
+558,X: Delay Between Attacks
+568,X: Enemy Animation Frame Code
+578,X: Enemy HP
+588,X: Collision, Explosion Type, Score Code
+
+xxxx ....	Score Code
+.... x...	Explosion Type
+.... .xxx	Collision Code ?
+
+598,X: ??? Enemy Facing Direction, Hit Flag (Bit 2) (and more)
+5A8,X: Enemy Attributes
+5B8,X
+5C8,X: Bullet Angle (0 = due right) (C = due left)
+5D8,X
+5E8,X: Enemy Bullet Counter (among other things)
+
+6xx: Sprite Data
+
+680: Tile Collision Data
+
+7C0,X: Palettes
+
+7E0: High Score (low byte)
+7E1: High Score (high byte)
+7E2: Player 1 Score (low byte)
+7E3: Player 1 Score (high byte)
+7E4: Player 2 Score (low byte)
+7E5: Player 2 Score (high byte)
+
+7EC: Bank to return to
+
+--------

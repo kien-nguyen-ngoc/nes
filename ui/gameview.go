@@ -3,7 +3,7 @@ package ui
 import (
 	"image"
 
-	"github.com/fogleman/nes/nes"
+	"../nes"
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.1/glfw"
 )
@@ -72,7 +72,7 @@ func (view *GameView) Update(t, dt float64) {
 		view.director.ShowMenu()
 	}
 	if readKey(window, glfw.KeyEscape) {
-		view.director.ShowMenu()
+		//view.director.ShowMenu()
 	}
 	updateControllers(window, console)
 	console.StepSeconds(dt)
@@ -90,18 +90,22 @@ func (view *GameView) onKey(window *glfw.Window,
 	if action == glfw.Press {
 		switch key {
 		case glfw.KeySpace:
-			screenshot(view.console.Buffer())
+			//screenshot(view.console.Buffer())
 		case glfw.KeyR:
 			view.console.Reset()
 		case glfw.KeyTab:
 			if view.record {
 				view.record = false
-				animation(view.frames)
+				//animation(view.frames)
 				view.frames = nil
 			} else {
 				view.record = true
 			}
 		}
+		env := new(Environment)
+		env.console = view.console
+		lives := env.getScores()
+		println(lives)
 	}
 }
 

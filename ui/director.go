@@ -3,7 +3,7 @@ package ui
 import (
 	"log"
 
-	"github.com/fogleman/nes/nes"
+	"../nes"
 	"github.com/go-gl/gl/v2.1/gl"
 	"github.com/go-gl/glfw/v3.1/glfw"
 )
@@ -82,9 +82,14 @@ func (d *Director) PlayGame(path string) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	d.SetView(NewGameView(d, console, path, hash))
+	view := NewGameView(d, console, path, hash)
+	d.SetView(view)
+	console.Reset()
+
 }
 
 func (d *Director) ShowMenu() {
-	d.SetView(d.menuView)
+	if d.menuView != nil {
+		d.SetView(d.menuView)
+	}
 }
