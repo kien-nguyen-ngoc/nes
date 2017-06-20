@@ -38,6 +38,9 @@ func NewMenuView(director *Director, paths []string) View {
 	return &view
 }
 
+func (view *MenuView) GetConsole() nes.Console {
+	return *new(nes.Console)
+}
 func (view *MenuView) checkButtons() {
 	window := view.director.window
 	k1 := readKeys(window, false)

@@ -12,6 +12,7 @@ type View interface {
 	Enter()
 	Exit()
 	Update(t, dt float64)
+	GetConsole() nes.Console
 }
 
 type Director struct {
@@ -27,6 +28,10 @@ func NewDirector(window *glfw.Window, audio *Audio) *Director {
 	director.window = window
 	director.audio = audio
 	return &director
+}
+
+func (d *Director) GetView() View {
+	return d.view
 }
 
 func (d *Director) SetTitle(title string) {

@@ -1,4 +1,4 @@
-package main
+package run
 
 import (
 	"io/ioutil"
@@ -7,7 +7,7 @@ import (
 	"path"
 	"strings"
 
-	"./ui"
+	"../ui"
 )
 
 func main() {

@@ -25,6 +25,10 @@ func NewGameView(director *Director, console *nes.Console, title, hash string) V
 	return &GameView{director, console, title, hash, texture, false, nil}
 }
 
+func (view *GameView) GetConsole() nes.Console {
+	return *view.console
+}
+
 func (view *GameView) Enter() {
 	gl.ClearColor(0, 0, 0, 1)
 	view.director.SetTitle(view.title)
@@ -102,10 +106,6 @@ func (view *GameView) onKey(window *glfw.Window,
 				view.record = true
 			}
 		}
-		env := new(Environment)
-		env.console = view.console
-		lives := env.getScores()
-		println(lives)
 	}
 }
 
