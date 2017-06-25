@@ -29,6 +29,10 @@ func (view *GameView) GetConsole() nes.Console {
 	return *view.console
 }
 
+func (view *GameView) GetTexture() uint32 {
+	return view.texture
+}
+
 func (view *GameView) Enter() {
 	gl.ClearColor(0, 0, 0, 1)
 	view.director.SetTitle(view.title)
@@ -63,7 +67,8 @@ func (view *GameView) Exit() {
 	view.console.SaveState(savePath(view.hash))
 }
 
-func (view *GameView) Update(t, dt float64) {
+func (view *GameView) Update(t, dt float64, action ...byte) {
+	dt = dt * float64(view.director.speed)
 	if dt > 1 {
 		dt = 0
 	}
@@ -78,7 +83,11 @@ func (view *GameView) Update(t, dt float64) {
 	if readKey(window, glfw.KeyEscape) {
 		//view.director.ShowMenu()
 	}
-	updateControllers(window, console)
+	if view.director.auto {
+		updateControllers(view, window, console, view.director.act)
+	} else {
+		updateControllers(view, window, console)
+	}
 	console.StepSeconds(dt)
 	gl.BindTexture(gl.TEXTURE_2D, view.texture)
 	setTexture(console.Buffer())
@@ -87,6 +96,7 @@ func (view *GameView) Update(t, dt float64) {
 	if view.record {
 		view.frames = append(view.frames, copyImage(console.Buffer()))
 	}
+
 }
 
 func (view *GameView) onKey(window *glfw.Window,
@@ -107,6 +117,9 @@ func (view *GameView) onKey(window *glfw.Window,
 			}
 		}
 	}
+}
+func DrawBuffer(window *glfw.Window) {
+	drawBuffer(window)
 }
 
 func drawBuffer(window *glfw.Window) {
@@ -134,11 +147,17 @@ func drawBuffer(window *glfw.Window) {
 	gl.End()
 }
 
-func updateControllers(window *glfw.Window, console *nes.Console) {
+func updateControllers(view *GameView, window *glfw.Window, console *nes.Console, action ...int32) {
 	turbo := console.PPU.Frame%6 < 3
 	k1 := readKeys(window, turbo)
+	if action != nil && action[0] >= 0 {
+		k1 = [8]bool{}
+		k1[action[0]] = true
+	}
 	j1 := readJoystick(glfw.Joystick1, turbo)
 	j2 := readJoystick(glfw.Joystick2, turbo)
 	console.SetButtons1(combineButtons(k1, j1))
 	console.SetButtons2(j2)
+	view.director.SetAct(-1)
+	println("release")
 }

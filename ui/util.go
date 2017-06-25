@@ -66,6 +66,7 @@ func readKeys(window *glfw.Window, turbo bool) [8]bool {
 func readJoystick(joy glfw.Joystick, turbo bool) [8]bool {
 	var result [8]bool
 	return result
+
 	if !glfw.JoystickPresent(joy) {
 		return result
 	}
@@ -131,6 +132,9 @@ func createTexture() uint32 {
 	return texture
 }
 
+func SetTexture(im *image.RGBA) {
+	setTexture(im)
+}
 func setTexture(im *image.RGBA) {
 	size := im.Rect.Size()
 	gl.TexImage2D(

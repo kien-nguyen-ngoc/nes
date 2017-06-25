@@ -57,26 +57,26 @@ func Run(paths []string) {
 	gl.Enable(gl.TEXTURE_2D)
 
 	// run director
-	director := NewDirector(window, audio)
+	director := NewDirector(window, audio, false, 1)
 	director.Start(paths)
 }
 
-func Init() Director {
+func Init(autoplay bool, speed int32) (Director, Audio) {
 	// initialize audio
 	portaudio.Initialize()
-	defer portaudio.Terminate()
+	//defer portaudio.Terminate()
 
 	audio := NewAudio()
 	if err := audio.Start(); err != nil {
 		log.Fatalln(err)
 	}
-	defer audio.Stop()
+	//defer audio.Stop()
 
 	// initialize glfw
 	if err := glfw.Init(); err != nil {
 		log.Fatalln(err)
 	}
-	defer glfw.Terminate()
+	//defer glfw.Terminate()
 
 	// create window
 	glfw.WindowHint(glfw.ContextVersionMajor, 2)
@@ -94,8 +94,6 @@ func Init() Director {
 	gl.Enable(gl.TEXTURE_2D)
 
 	// run director
-	director := NewDirector(window, audio)
-	return *director
-	//director.Start(paths)
+	director := NewDirector(window, audio, autoplay, speed)
+	return *director, *audio
 }
-

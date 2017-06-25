@@ -41,6 +41,10 @@ func NewMenuView(director *Director, paths []string) View {
 func (view *MenuView) GetConsole() nes.Console {
 	return *new(nes.Console)
 }
+func (view *MenuView) GetTexture() uint32 {
+	return view.texture.texture
+}
+
 func (view *MenuView) checkButtons() {
 	window := view.director.window
 	k1 := readKeys(window, false)
@@ -126,7 +130,7 @@ func (view *MenuView) Exit() {
 	view.director.window.SetCharCallback(nil)
 }
 
-func (view *MenuView) Update(t, dt float64) {
+func (view *MenuView) Update(t, dt float64, action ...byte) {
 	view.checkButtons()
 	view.texture.Purge()
 	window := view.director.window
